@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jun  5 20:29:09 2021
+Created on Sun Jun  6 19:24:45 2021
 
 @author: nahuel
 """
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
-from kivy.uix.screenmanager import ScreenManager, Screen
+#from kivy.uix.screenmanager import ScreenManager, Screen
 
+
+Builder.load_file('progress.kv')
 
 def reset():
     import kivy.core.window as window
@@ -21,23 +23,19 @@ def reset():
         for cat in Cache._categories:
             Cache._objects[cat] = {}
 
-#Define our different screens
-class FirstWindow(Screen):
-    pass
-
-class SecondWindow(Screen):
-    pass
-
-class WindowManager(ScreenManager):
-    pass
-
-
-#Designate Our .kv design file
-kv = Builder.load_file('new_plot.kv')
-
+class MyLayout(Widget):
+    def press_it(self):
+        current = self.ids.my_progress_bar.value
+        if current == 1:
+            current = 0
+        current+= .25
+        self.ids.my_progress_bar.value = current
+        self.ids.my_label.text = f'{int(current*100)} % Progress' 
+    
+        
 class AwesomeApp(App):
     def build(self):
-        return kv
+        return MyLayout()
     
 if __name__ == '__main__':
     reset()
