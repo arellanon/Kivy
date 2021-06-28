@@ -1,0 +1,36 @@
+<MyLayout>:
+    orientation: 'vertical'
+    canvas:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        
+<Wid_Box1>:
+    size_hint: 1,.9
+    LeftRect:
+        pos: 300, 300
+    RightRect:
+        pos: 600, 600
+            
+<Wid_Box2>:
+    size_hint: 1,.1
+    Button:
+        text: "start!"
+        
+<LeftRect>:
+    canvas:
+        Color:
+            rgba: 0, 1, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: 50, 100
+
+<RightRect>:
+    canvas:
+        Color:
+            rgba: 1, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: 50, 100            
