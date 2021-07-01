@@ -10,9 +10,9 @@
 <Wid_Box1>:
     size_hint: 1,.9
     LeftRect:
-        pos_hint: {'center_y': 0.5, 'center_x': 0.5}
+        pos: 300, 300
     RightRect:
-        
+        pos_hint: {'center_y': 1, 'center_x': 1}
             
 <Wid_Box2>:
     size_hint: 1,.1
@@ -32,4 +32,5 @@
         Color:
             rgba: 1, 0, 0, 1
         Rectangle:
-            size: 50, 100            
+            pos: self.pos
+            size: 50, 200            

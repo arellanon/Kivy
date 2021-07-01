@@ -1,0 +1,30 @@
+<MyWidget>:
+    orientation: 'vertical'
+    Widget:
+        size_hint: 1,.9
+        Widget:
+            id: left
+            pos_hint: {'center_y': 0.5, 'center_x': 0.2}
+            size_hint: 0.1, 0.2
+            canvas:            
+                Color:
+                    rgb: 0.1, 0.6, 0
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+        Widget:
+            id: right
+            pos_hint: {'center_y': 0.5, 'center_x': 0.8}
+            size_hint: 0.1, 0.2
+            canvas:
+                Color:
+                    rgb: 0.1, 0.6, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+                    
+    Widget:
+        size_hint: 1,.1
+        Button:
+            text: "start!"
+            on_release: root.animate_it(self)
