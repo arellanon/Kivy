@@ -14,7 +14,9 @@ Builder.load_file('test.kv')
 #Builder.load_string(kv_string)
 
 class MyWidget(FloatLayout):
-    pass
+    def __init__(self,):
+        super(MyWidget, self).__init__()
+        print( "TestPanel ids:", self.ids)
 """    
     def animate_it(self, widget, *args):
         animate = Animation(
@@ -39,7 +41,7 @@ class Wid2(FloatLayout):
         
 #        self.ids.left.pos_hint["x"] += 0.1 
 #        pos_hint["x"] += 0.1
-        print( "TestPanel ids:", self.ids)
+        #print( "out: ", self.ids['wid1'] )
         
         # Start the animation
         animate.start(widget)
