@@ -17,6 +17,19 @@ class MyWidget(FloatLayout):
     def __init__(self,):
         super(MyWidget, self).__init__()
         print( "TestPanel ids:", self.ids)
+        
+        
+    def animate_it(self, widget, *args):
+        animate = Animation(
+            background_color=(0,0,1,1),
+            duration=3)
+        
+#        self.ids.left.pos_hint["x"] += 0.1 
+#        pos_hint["x"] += 0.1
+        #print( "out: ", self.ids['wid1'] )
+        
+        # Start the animation
+        animate.start(widget)
 """    
     def animate_it(self, widget, *args):
         animate = Animation(
@@ -34,17 +47,7 @@ class Wid1(FloatLayout):
     pass
 
 class Wid2(FloatLayout):
-    def animate_it(self, widget, *args):
-        animate = Animation(
-            background_color=(0,0,1,1),
-            duration=3)
-        
-#        self.ids.left.pos_hint["x"] += 0.1 
-#        pos_hint["x"] += 0.1
-        #print( "out: ", self.ids['wid1'] )
-        
-        # Start the animation
-        animate.start(widget)
+    pass
 
 class TestApp(App):
     def build(self):
