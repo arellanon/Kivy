@@ -1,13 +1,14 @@
 <MyWidget>:
     orientation: 'vertical'
-    BoxLayout:
+    FloatLayout:
         id: wid1
         size_hint: 1,.9
         Widget:
             id: left
             pos_hint: {'center_y': 0.5, 'center_x': 0.2}
-            size_hint: None, 0.2
-            width: 20
+            size_hint: None, None
+            width: 50
+            height: 100
             canvas:            
                 Color:
                     rgb: 0.1, 0.6, 0
@@ -17,8 +18,9 @@
         Widget:
             id: right
             pos_hint: {'center_y': 0.5, 'center_x': 0.8}
-            size_hint: None, 0.3
-            width: 20
+            size_hint: None, None
+            width: 50
+            height: 100
             canvas:
                 Color:
                     rgb: 0.1, 0.6, 1
