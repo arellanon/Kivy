@@ -9,48 +9,47 @@ from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
 from kivy.lang import Builder
 from kivy.animation import Animation
-from kivy.uix.widget import Widget
-from kivy.properties import ListProperty
-from kivy.clock import Clock
-from kivy.core.window import Window
+#from kivy.uix.widget import Widget
+#from kivy.properties import ListProperty
+#from kivy.clock import Clock
+#from kivy.core.window import Window
 
 Builder.load_file('test.kv')
 #Builder.load_string(kv_string)
 
+def reset():
+    import kivy.core.window as window
+    from kivy.base import EventLoop
+    if not EventLoop.event_listeners:
+        from kivy.cache import Cache
+        window.Window = window.core_select_lib('window', window.window_impl, True)
+        Cache.print_usage()
+        for cat in Cache._categories:
+            Cache._objects[cat] = {}
+
 class MyWidget(FloatLayout):
     def __init__(self,):
-        super(MyWidget, self).__init__()
-        print( "TestPanel ids:", self.ids)
+        super(MyWidget, self).__init__()        
+        
+    def animate_it(self, *args):
+        wid_left = self.ids.left
+        animate = Animation( height = 200, duration=.5)
+        animate += Animation( height = 100, duration=.5)
+        animate.start(wid_left)
         
         
-    def animate_it(self, widget, *args):
-        animate = Animation(
-            background_color=(0,0,1,1),
-            duration=3)
+        #animate.bind(on_complete=self.on_anim1_complete,
+                #on_progress=self.on_anim1_progress)
         
-        animate += Animation( height = 200,
-                              duration=.5)        
+        """
+        wid_right = self.ids.right
+        animate2 = Animation( height = 200, duration=.5)
+        animate2 += Animation( height = 100, duration=.5)
+        animate2.start(wid_right)
         
-        print(self.ids.left.height)
-        self.ids.left.height+=0.1
-        #self.ids.left.size_hint["x"] += 0.1 
-#        pos_hint["x"] += 0.1
-        #print( "out: ", self.ids['wid1'] )
-        
-        # Start the animation
-        animate.start(widget)
-"""    
-    def animate_it(self, widget, *args):
-        animate = Animation(
-            background_color=(0,0,1,1),
-            duration=3)
-        
-#        self.ids.left.pos_hint["x"] += 0.1 
-#        pos_hint["x"] += 0.1
-        print( "TestPanel ids:", self.ids.wid1)
-        
-        # Start the animation
-        animate.start(widget)
+        animate.on_complete(print("hola mundo"))
+        """
+
 """
 class left(Widget):
     velocity = ListProperty([10, 15])
@@ -67,11 +66,12 @@ class left(Widget):
             self.velocity[0] *= -1
         if self.y < 0 or (self.y + self.height) > Window.height:
             self.velocity[1] *= -1
-
+"""
 
 class TestApp(App):
     def build(self):
         return MyWidget()
 
 if __name__ == '__main__':
+    reset()
     TestApp().run()
