@@ -9,6 +9,7 @@ from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
 from kivy.lang import Builder
 from kivy.animation import Animation
+import time
 #from kivy.uix.widget import Widget
 #from kivy.properties import ListProperty
 #from kivy.clock import Clock
@@ -29,43 +30,25 @@ def reset():
 
 class MyWidget(FloatLayout):
     def __init__(self,):
-        super(MyWidget, self).__init__()        
+        super(MyWidget, self).__init__()
         
     def animate_it(self, *args):
-        wid_left = self.ids.left
-        animate = Animation( height = 200, duration=.5)
-        animate += Animation( height = 100, duration=.5)
-        animate.start(wid_left)
+        #wid_left = self.ids.left
+        self.my_animation(self.ids.left)
+        self.my_animation(self.ids.right)
+        #animate.bind(on_complete= self.my_callback )
         
+    def my_animation(self, in_widget, *args):
+        animate = Animation(height = 200, duration=.5)
+        animate += Animation(height = 100, duration=.5)
+        animate.start(in_widget)
         
-        #animate.bind(on_complete=self.on_anim1_complete,
-                #on_progress=self.on_anim1_progress)
-        
-        """
-        wid_right = self.ids.right
+"""
+    def my_callback(self, in_widget, *args):
+        #wid_right = in_widget
         animate2 = Animation( height = 200, duration=.5)
         animate2 += Animation( height = 100, duration=.5)
-        animate2.start(wid_right)
-        
-        animate.on_complete(print("hola mundo"))
-        """
-
-"""
-class left(Widget):
-    velocity = ListProperty([10, 15])
-
-    def __init__(self, **kwargs):
-        super(left, self).__init__(**kwargs)
-        Clock.schedule_interval(self.update, 1/60.)
-
-    def update(self, *args):
-        self.x += self.velocity[0]
-        self.y += self.velocity[1]
-
-        if self.x < 0 or (self.x + self.width) > Window.width:
-            self.velocity[0] *= -1
-        if self.y < 0 or (self.y + self.height) > Window.height:
-            self.velocity[1] *= -1
+        animate2.start(in_widget)
 """
 
 class TestApp(App):
