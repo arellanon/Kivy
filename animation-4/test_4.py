@@ -12,6 +12,7 @@ from kivy.animation import Animation
 #import time
 #from kivy.uix.widget import Widget
 #from kivy.properties import ListProperty
+#from kivy.graphics import Color, Ellipse, Line
 #from kivy.clock import Clock
 #from kivy.core.window import Window
 
@@ -34,12 +35,16 @@ class MyWidget(FloatLayout):
         
     def animate_it(self, *args):
         #wid_left = self.ids.left
+#        print( )
+        #self.ids.bar.canvas.add( Color( 0, 1, 0) )
         self.my_animation(self.ids.bar)
         #self.my_animation(self.ids.right)
         #animate.bind(on_complete= self.my_callback )
         
     def my_animation(self, in_widget, *args):
         animate = Animation(width = 400, duration=1)
+        animate += Animation(animated_color=(0,0,1) )
+        #animate += Animation( background_color =(1, 1, 1, 1), duration=3)
         animate += Animation(width = 0, duration=1)
         animate.start(in_widget)
 

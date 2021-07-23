@@ -9,9 +9,10 @@
             size_hint: None, None
             width: 0
             height: 100
+            animated_color: (1, 0, 0)
             canvas:
                 Color:
-                    rgb: 0.1, 0.6, 0
+                    rgb: self.animated_color
                 Rectangle:
                     size: self.size
                     pos: self.pos
