@@ -5,19 +5,15 @@ Created on Wed Jun 30 20:55:07 2021
 
 @author: nahuel
 """
+import random
+import time
 from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
 from kivy.lang import Builder
 from kivy.animation import Animation
-#import time
-#from kivy.uix.widget import Widget
-#from kivy.properties import ListProperty
-#from kivy.graphics import Color, Ellipse, Line
-#from kivy.clock import Clock
-#from kivy.core.window import Window
+
 
 Builder.load_file('test_4.kv')
-#Builder.load_string(kv_string)
 
 def reset():
     import kivy.core.window as window
@@ -34,19 +30,58 @@ class MyWidget(FloatLayout):
         super(MyWidget, self).__init__()
         
     def animate_it(self, *args):
-        #wid_left = self.ids.left
-#        print( )
-        #self.ids.bar.canvas.add( Color( 0, 1, 0) )
         self.my_animation(self.ids.bar)
-        #self.my_animation(self.ids.right)
-        #animate.bind(on_complete= self.my_callback )
         
     def my_animation(self, in_widget, *args):
-        animate = Animation(width = 400, duration=1)
+        self.time_trial = 8
+        self.run_n = 2
+        self.trial_per_run = 10
+        self.time_pause = 3
+        
+        
+        for i in range(self.run_n):
+            print('\nCorrida N#: ', i)
+            #Se crea lista de stack
+            stack = []
+            left  = [0] * (self.trial_per_run // 2)
+            rigth = [1] * (self.trial_per_run // 2)    
+            stack = left + rigth
+            print(stack)
+            random.shuffle(stack)
+            print(stack)
+            animate = Animation()
+            for x in stack:
+                #time.sleep(self.time_pause)
+                """
+                ts = time.time()
+                print()
+                print(x, ' ', ts, ' - ', datetime.fromtimestamp(ts))
+                label=np.array( [ [ts], [x] ] )
+                if labels is None:
+                    labels = label
+                else:
+                    labels = np.append(labels, label, axis=1)
+                    
+                os.system('play -nq -t alsa synth {} sine {}'.format(duration, freq)) #beep
+                """
+                #for j in range(self.time_trial):
+                if x == 0:
+                    animate = self.izquierda(animate)
+                else:
+                    animate = self.derecha(animate)    
+            animate.start(in_widget)
+        
+    def derecha(self, animate):
         animate += Animation(animated_color=(0,0,1) )
-        #animate += Animation( background_color =(1, 1, 1, 1), duration=3)
-        animate += Animation(width = 0, duration=1)
-        animate.start(in_widget)
+        animate += Animation( size_hint_x = 0.7, duration=self.time_trial//2 )
+        animate += Animation( size_hint_x = 0, duration=self.time_trial//2 )
+        return animate
+    
+    def izquierda(self, animate):
+        animate += Animation(animated_color=(1,0,0) )
+        animate += Animation( size_hint_x = -0.7, duration=self.time_trial//2 )
+        animate += Animation( size_hint_x = 0, duration=self.time_trial//2 )
+        return animate
 
 class TestApp(App):
     def build(self):
