@@ -1,19 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jun 30 20:55:07 2021
+Created on Sat Jun  5 16:48:16 2021
 
 @author: nahuel
 """
 import random
-import time
 from kivy.app import App
-from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.widget import Widget
 from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.animation import Animation
-
-
-Builder.load_file('test_4.kv')
 
 def reset():
     import kivy.core.window as window
@@ -25,11 +22,26 @@ def reset():
         for cat in Cache._categories:
             Cache._objects[cat] = {}
 
-class MyWidget(FloatLayout):
-    def __init__(self,):
-        super(MyWidget, self).__init__()
-        
+#Define our different screens
+class MenuWindow(Screen):
+    pass
+
+class CalibracionWindow(Screen):
+    pass
+
+class MachineLearningWindow(Screen):
+    pass
+
+class RealtimeWindow(Screen):
+    pass
+
+class ConfiguracionCalibracionWindow(Screen):
+    pass
+
+class StartCalibracionWindow(Screen):
+    
     def animate_it(self, *args):
+        #print("Print: ", self.ids.bar)
         self.my_animation(self.ids.bar)
         
     def my_animation(self, in_widget, *args):
@@ -50,8 +62,6 @@ class MyWidget(FloatLayout):
             random.shuffle(stack)
             print(stack)
             for x in stack:
-                #time.sleep(self.time_pause)
-                #for j in range(self.time_trial):
                 if x == 0:
                     animate = self.izquierda(animate)
                 else:
@@ -76,10 +86,17 @@ class MyWidget(FloatLayout):
         print("pausa: ", self.time_pause)
         return animate
 
-class TestApp(App):
-    def build(self):
-        return MyWidget()
 
+class WindowManager(ScreenManager):
+    pass
+
+#Designate Our .kv design file
+kv = Builder.load_file('menu.kv')
+
+class AwesomeApp(App):
+    def build(self):
+        return kv
+    
 if __name__ == '__main__':
     reset()
-    TestApp().run()
+    AwesomeApp().run()
